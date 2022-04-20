@@ -43,7 +43,6 @@ namespace ft {
 
 			explicit vector(size_type n, const value_type& val = value_type(),
 				const allocator_type& alloc = allocator_type()) {
-
 				_allocator = alloc;
 				_start = NULL;
 				if (n > _allocator.max_size())
@@ -64,7 +63,6 @@ namespace ft {
 			template <class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL) {
-			
 					_allocator = alloc;
 					difference_type dist = std::distance(first, last);
 					_n = static_cast<size_type>(dist);
@@ -96,7 +94,6 @@ namespace ft {
 			}
 
 			vector	&operator=(const vector& rhs) {
-
 				if (*this != rhs) {
 					_dealloc();
 					if (rhs.empty())
@@ -113,44 +110,18 @@ namespace ft {
 				return (*this);
 			}
 
-			iterator	begin() {
-				iterator res = _start;
-				return	res;
-			}
-
-			const_iterator begin() const {
-				const_iterator res = _start;
-				return res;
-			}
-			
-			reverse_iterator	rbegin(void) {
-				return (reverse_iterator(_end));
-			}
-			
-			const_reverse_iterator	rbegin(void) const {
-				return (const_reverse_iterator(_end));
-			}
-			
-			reverse_iterator	rend(void) {
-				return (reverse_iterator(_start));
-			}
-
-			const_reverse_iterator	rend(void) const {
-				return (const_reverse_iterator(_start));
-			}
-			
-			iterator	end() {
-				iterator res = _end;
-				return res;
-			}
-			
-			const_iterator end() const {
-				const_iterator res = _end;
-				return res;
-			}
-
-			size_type	size() const { return _n; }
-			size_type	max_size() const { return _allocator.max_size(); }
+			iterator                begin()             { return (iterator(_start)); }
+			const_iterator          begin()     const   { return (const_iterator(_start)); }
+			reverse_iterator	    rbegin()            { return (reverse_iterator(_end)); }
+			const_reverse_iterator	rbegin()    const   { return (const_reverse_iterator(_end)); }
+			reverse_iterator	    rend(void)          { return (reverse_iterator(_start)); }
+			const_reverse_iterator	rend(void)  const   { return (const_reverse_iterator(_start)); }
+			iterator	            end()               { return (iterator(_end)); }
+			const_iterator          end()       const   { return (const_iterator(_end)); }
+			size_type               size()      const   { return _n; }
+			size_type               max_size()  const   { return _allocator.max_size(); }
+            size_type	            capacity()  const   { return _capacity; }
+			bool	                empty()     const   { return (_n == 0 ? true : false); }
 			
 			void resize(size_type size, value_type val = value_type()) {
 				if (size > _allocator.max_size())
@@ -172,14 +143,6 @@ namespace ft {
 			    if (size > _n)
 			        _reallocc(size, val);
 			}
-			
-			size_type	capacity() const { return _capacity; }
-			
-			bool		empty() const {
-				if (_n == 0)
-					return true;
-				return false;
-			}
 
 			void	reserve(size_type n) {
 				if (_capacity > n)
@@ -190,9 +153,9 @@ namespace ft {
 					_realloc(n);
 			}
 			
-			reference		operator[](size_type n) { return (_start[n]); }
+			reference		operator[](size_type n)         { return (_start[n]); }
 			
-			const_reference	operator[](size_type n) const { return (_start[n]); }
+			const_reference	operator[](size_type n) const   { return (_start[n]); }
 			
 			reference		at(size_type n) {
 				if (n > _n)
@@ -206,13 +169,10 @@ namespace ft {
 				return (_start[n]);
 			}
 			
-			reference		front() {return *(_start);}
-			
-			const_reference	front() const { return *(_start);}
-			
-			reference		back() { return *(_start + (_n - 1)); }
-			
-			const_reference	back() const { return *(_start + (_n - 1)); }
+			reference		front()         { return *(_start); }
+			const_reference	front() const   { return *(_start); }
+			reference		back()          { return *(_start + (_n - 1)); }
+			const_reference	back()  const   { return *(_start + (_n - 1)); }
 			
 
 			template <class InputIterator>
@@ -357,8 +317,7 @@ namespace ft {
 				std::swap(_end, x._end);
 			}
 			
-			void	clear()
-			{
+			void	clear() {
 				if (_n == 0)
 					return;
 				size_type len = size();
@@ -371,6 +330,7 @@ namespace ft {
 				_n = 0;
 			}
 			allocator_type get_allocatorator() const { return _allocator; }
+            
 		private:
 			allocator_type	_allocator;
 			size_type		_n;
