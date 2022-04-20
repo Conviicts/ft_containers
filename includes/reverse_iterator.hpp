@@ -1,6 +1,8 @@
 #ifndef __REVERSE_ITERATOR_HPP__
 #define __REVERSE_ITERATOR_HPP__
 
+#include "iterator_traits.hpp"
+
 namespace ft {
     template <typename Iterator>
 	class reverse_iterator {
@@ -86,6 +88,120 @@ namespace ft {
 		private:
 			Iterator	_pointer;
 	};
+
+	template <typename Iterator>
+	typename reverse_iterator<Iterator>::reference	reverse_iterator<Iterator>::operator*() const {
+		Iterator tmp = _pointer;
+		return *--tmp;
+	}
+
+	template<typename Iterator>
+	reverse_iterator<Iterator>	operator+(typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator> & rhs) {
+		return (reverse_iterator<Iterator>(rhs.base() - n));
+	}
+	
+	template <typename IteratorL, typename IteratorR>
+	typename reverse_iterator<IteratorL>::difference_type operator-(const reverse_iterator<IteratorL> & lhs,
+		const reverse_iterator<IteratorR> & rhs) {
+		return rhs.base() - lhs.base();
+	}
+	
+	template <typename Iterator>
+	bool operator==(const reverse_iterator<Iterator> & lhs,
+		const reverse_iterator<Iterator> & rhs) {
+		if (lhs.base() == rhs.base())
+			return true;
+		return false;
+	}
+
+	template <typename Iterator>
+	bool operator!=(const reverse_iterator<Iterator> & lhs,
+		const reverse_iterator<Iterator> & rhs) {
+		if (lhs.base() != rhs.base())
+			return true;
+		return false;
+	}
+
+
+	template <typename Iterator>
+	bool operator<(const reverse_iterator<Iterator> & lhs,
+		const reverse_iterator<Iterator> & rhs) {
+		return rhs.base() < lhs.base();
+	}
+
+	template <typename Iterator>
+	bool operator<=(const reverse_iterator<Iterator> & lhs,
+		const reverse_iterator<Iterator> & rhs) {
+		if (lhs.base() == rhs.base())
+			return true;
+		else if (lhs.base() < rhs.base())
+			return false;
+		return true;
+	}
+
+	template <typename Iterator>
+	bool operator>(const reverse_iterator<Iterator> & lhs,
+		const reverse_iterator<Iterator> & rhs) {
+		return rhs < lhs;
+	}
+
+	template <typename Iterator>
+	bool operator>=(const reverse_iterator<Iterator> & lhs,
+		const reverse_iterator<Iterator> & rhs) {
+		if (lhs.base() == rhs.base())
+			return true;
+		else if (lhs.base() > rhs.base())
+			return false;
+		return true;
+	}
+
+	template <typename IteratorL, typename IteratorR>
+	bool operator==(const reverse_iterator<IteratorL> & lhs,
+		const reverse_iterator<IteratorR> & rhs) {
+		if (lhs.base() == rhs.base())
+			return true;
+		return false;
+	}
+
+	template <typename IteratorL, typename IteratorR>
+	bool operator!=(const reverse_iterator<IteratorL> & lhs,
+		const reverse_iterator<IteratorR> & rhs) {
+		if (lhs.base() != rhs.base())
+			return true;
+		return false;
+	}
+
+template <typename IteratorR, typename IteratorL>
+	bool operator<(const reverse_iterator<IteratorR> & lhs,
+		const reverse_iterator<IteratorL> & rhs) {
+		return rhs.base() < lhs.base();
+	}
+
+	template <typename IteratorR, typename IteratorL>
+	bool operator<=(const reverse_iterator<IteratorR> & lhs,
+		const reverse_iterator<IteratorL> & rhs) {
+		if (lhs.base() == rhs.base())
+			return true;
+		else if (lhs.base() < rhs.base())
+			return false;
+		return true;
+	}
+
+	template <typename IteratorR, typename IteratorL>
+	bool operator>(const reverse_iterator<IteratorR> & lhs,
+		const reverse_iterator<IteratorL> & rhs) {
+		return rhs < lhs;
+	}
+
+	template <typename IteratorR, typename IteratorL>
+	bool operator>=(const reverse_iterator<IteratorR> & lhs,
+		const reverse_iterator<IteratorL> & rhs) {
+		if (lhs.base() == rhs.base())
+			return true;
+		else if (lhs.base() > rhs.base())
+			return false;
+		return true;
+	}
 }
 
 #endif

@@ -4,7 +4,7 @@ SRCS			= main.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
 CXX				= c++
-CXXFLAGS		= -g -Wall -Werror -Wextra -I./ -std=c++98
+CXXFLAGS		= -g -Wall -Werror -Wextra -I./includes -std=c++98
 
 
 all:			$(NAME)
