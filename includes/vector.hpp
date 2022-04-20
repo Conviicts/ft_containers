@@ -251,8 +251,7 @@ namespace ft {
 			}
 			
 			void	pop_back() {
-				if (_n > 0)
-				{
+				if (_n > 0) {
 					_allocator.destroy(_end - 1);
 					_end--;
 					_n--;
@@ -272,23 +271,20 @@ namespace ft {
 				iterator				end;
 
 				resize(_n + n);
-
 				prev = begin() + prevSize;
 				position = begin() + beginToPos;
 				end = _start + _n;
 				while (prev != position) {
-
 					*(--end) = *(--prev);
 				}
 				while (0 < n) {
-
 					*position++ = val;
 					n--;
 				}
 				_end = _start + _n;
 			}
 
-			template < class InputIterator >
+			template <class InputIterator>
 				void	insert (iterator position, InputIterator first, InputIterator last, 
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL) {
 					size_type	pos = 0;
