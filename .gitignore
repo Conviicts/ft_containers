@@ -1,0 +1,6 @@
+*.o
+ft_containers
+.vscode
+containers_test
+a
+b
