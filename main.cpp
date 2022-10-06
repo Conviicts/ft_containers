@@ -57,7 +57,6 @@ static void	mapTests() {
     mapClear(outfile);
     mapCount(outfile);
     mapEmpty(outfile);
-    mapEnd(outfile);
     mapErase(outfile);
     mapEqualRange(outfile);
     mapFind(outfile);

@@ -62,7 +62,6 @@ int mapBegin(std::ofstream &outfile);
 int mapClear(std::ofstream &outfile);
 int mapCount(std::ofstream &outfile);
 int mapEmpty(std::ofstream &outfile);
-int mapEnd(std::ofstream &outfile);
 int mapErase(std::ofstream &outfile);
 int mapEqualRange(std::ofstream &outfile);
 int mapFind(std::ofstream &outfile);
