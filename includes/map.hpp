@@ -110,7 +110,14 @@ namespace ft {
                 return _rbt.get_max_size();
             }
 
-            mapped_type	&		    operator[](const key_type &k) {
+            mapped_type& at (const key_type& k) {
+                iterator it = find(k);
+                if (it == end())
+                    throw std::out_of_range("map::at");
+                return it->second;
+            }
+
+            mapped_type&		    operator[](const key_type &k) {
                 value_type val = ft::make_pair(k, mapped_type());
                 return (((_rbt.insert(val)).first)->second);
             }

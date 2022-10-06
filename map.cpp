@@ -43,17 +43,18 @@ int		mapAt(std::ofstream &outfile) {
 }
 
 int		mapBegin(std::ofstream &outfile) {
-    outfile << std::endl << "* [MAP] Begin  --- *" << std::endl;
-    STDFT::map<char,int> myMap;
+	outfile << std::endl << "* [MAP] Begin End  --- *" << std::endl;
+	STDFT::map<char,int> mymap;
 
-    myMap['a']=10;
-    myMap['b']=20;
-    myMap['c']=30;
+	mymap['b'] = 100;
+	mymap['a'] = 200;
+	mymap['c'] = 300;
 
-    STDFT::map<char,int>::iterator it = myMap.begin();
-    outfile << it->first << " => " << it->second << '\n';
+	// show content:
+	for (STDFT::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+		outfile << it->first << " => " << it->second << '\n';
 
-    return 0;
+	return 0;
 }
 
 int		mapClear(std::ofstream &outfile) {
@@ -96,20 +97,6 @@ int		mapEmpty(std::ofstream &outfile) {
     myMap['b']=20;
     myMap['c']=30;
     outfile << "myMap.empty() is " << myMap.empty() << '\n';
-
-    return 0;
-}
-
-int		mapEnd(std::ofstream &outfile) {
-    outfile << std::endl << "* [MAP] End  --- *" << std::endl;
-    STDFT::map<char,int> myMap;
-
-    myMap['a']=10;
-    myMap['b']=20;
-    myMap['c']=30;
-
-    STDFT::map<char,int>::iterator it = myMap.end();
-    outfile << it->first << " => " << it->second << '\n';
 
     return 0;
 }
