@@ -1,60 +1,86 @@
-#include "includes/vector.hpp"
-#include <vector>
-#include <list>
+#include "main.hpp"
 
+static void	vectorTests() {
+	std::ofstream outfile;
 
-#define TESTED_NAMESPACE ft
-#define TESTED_TYPE std::string
-#define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
+	outfile.open(VECTORFILE);
 
-template <typename T>
-void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)
-{
-	const T_SIZE_TYPE size = vct.size();
-	const T_SIZE_TYPE capacity = vct.capacity();
-	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
-	// Cannot limit capacity's max value because it's implementation dependent
+    vectorAccessOperator(outfile);
+    vectorAssign(outfile);
+    vectorAt(outfile);
+    vectorBack(outfile);
+    vectorBegin(outfile);
+    vectorCapacity(outfile);
+    vectorClear(outfile);
+    vectorConstructor(outfile);
+    vectorEmpty(outfile);
+    vectorEnd(outfile);
+    vectorErase(outfile);
+    vectorFront(outfile);
+    vectorInsert(outfile);
+    vectorMaxSize(outfile);
+    vectorOperatorEqual(outfile);
+    vectorPopBack(outfile);
+    vectorPushBack(outfile);
+    vectorRbegin(outfile);
+    vectorRend(outfile);
+    vectorResize(outfile);
 
-	std::cout << "size: " << size << std::endl;
-	std::cout << "capacity: " << isCapacityOk << std::endl;
-	std::cout << "max_size: " << vct.max_size() << std::endl;
-	if (print_content)
-	{
-		typename TESTED_NAMESPACE::vector<T>::const_iterator it = vct.begin();
-		typename TESTED_NAMESPACE::vector<T>::const_iterator ite = vct.end();
-		std::cout << std::endl << "Content is:" << std::endl;
-		for (; it != ite; ++it)
-			std::cout << "- " << *it << std::endl;
-	}
-	std::cout << "###############################################" << std::endl;
+	outfile.close();
 }
 
-int		main(void)
-{
-	const int size = 5;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_ = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it(it_);
+static void	stackTests() {
+    std::ofstream outfile;
 
-	for (int i = 0; i < size; ++i)
-		vct[i] = (i + 1) * 5;
-	printSize(vct);
+    outfile.open(STACKFILE);
 
-	std::cout << (it_ == it.base()) << std::endl;
-	std::cout << (it_ == (it + 3).base()) << std::endl;
+    stackAccessOperator(outfile);
+    stackAssign(outfile);
+    stackEmpty(outfile);
+    stackEnd(outfile);
+    stackErase(outfile);
+    stackOperatorEqual(outfile);
+    stackPop(outfile);
+    stackPush(outfile);
 
-	std::cout << *(it.base() + 1) << std::endl;
-	std::cout << *(it - 3) << std::endl;
-	std::cout << *(it - 3).base() << std::endl;
-	it -= 3;
-	std::cout << *it.base() << std::endl;
+    outfile.close();
+}
 
-	std::cout << "TEST OFFSET" << std::endl;
-	std::cout << *(it) << std::endl;
-	std::cout << *(it).base() << std::endl;
-	std::cout << *(it - 0) << std::endl;
-	std::cout << *(it - 0).base() << std::endl;
-	std::cout << *(it - 1).base() << std::endl;
+static void	mapTests() {
+    std::ofstream outfile;
 
+    outfile.open(MAPFILE);
+
+    mapAccessOperator(outfile);
+    mapAt(outfile);
+    mapBegin(outfile);
+    mapClear(outfile);
+    mapCount(outfile);
+    mapEmpty(outfile);
+    mapEnd(outfile);
+    mapErase(outfile);
+    mapEqualRange(outfile);
+    mapFind(outfile);
+    mapInsert(outfile);
+
+    outfile.close();
+}
+
+int main(int ac, char **av) {
+	std::string input;
+
+	if (ac != 2) {
+		std::cout << "missing arg" << std::endl;
+		return (0);
+	}
+	input = av[1];
+	if (input.compare("vector") == 0)
+		vectorTests();
+    else if (input.compare("stack") == 0)
+        stackTests();
+    else if (input.compare("map") == 0)
+        mapTests();
+	else
+		std::cout << "bad argument" << std::endl;
 	return (0);
 }

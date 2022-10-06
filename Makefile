@@ -1,6 +1,9 @@
 NAME			= ft_containers
 
-SRCS			= main.cpp
+SRCS			= 	vector.cpp	\
+					stack.cpp	\
+					map.cpp		\
+					main.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
 CXX				= c++
@@ -14,6 +17,9 @@ all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+
+stl:			
+				@$(MAKE) all CXXFLAGS:="-DSTL -I./includes -std=c++98 -g -Wall -Werror -Wextra"
 
 clean:
 				rm -f $(OBJS)
